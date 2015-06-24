@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/html/src/main/main.iml" filepath="$PROJECT_DIR$/html/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/src/main/main1.iml" filepath="$PROJECT_DIR$/core/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/desktop/src/main/main2.iml" filepath="$PROJECT_DIR$/desktop/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/src/main/main3.iml" filepath="$PROJECT_DIR$/android/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poker.iml" filepath="$PROJECT_DIR$/poker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/poker-core.iml" filepath="$PROJECT_DIR$/core/poker-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/desktop/poker-desktop.iml" filepath="$PROJECT_DIR$/desktop/poker-desktop.iml" />
+    </modules>
+  </component>
+</project>
