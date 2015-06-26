@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.poker.core.mvc.CardBox;
 
 import static com.badlogic.poker.core.Utils.getRGBColor;
 
@@ -15,32 +16,37 @@ import static com.badlogic.poker.core.Utils.getRGBColor;
 public class PokerScreen implements Screen {
 
     PokerStage stage;
-    float elapsed;
+//    float elapsed;
 
     @Override
     public void show() {
         stage = new PokerStage();
+        CardBox cardActor = new CardBox();
+        stage.addActor(cardActor);
         stage.init();
     }
 
     @Override
     public void render(float delta) {
-        elapsed += Gdx.graphics.getDeltaTime();
-
+//        elapsed += Gdx.graphics.getDeltaTime();
+//        drawTableCards(delta);
         Color bgColor = getRGBColor(50, 255, 80);
         Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-    }
+//        stage.act(delta);
+        stage.draw();
 
-    private void drawTableCards(float delta) {
-/*        for (SpriteBatch batch:stage.tableCardsSprites) {
-            batch.begin();
-            System.out.println(delta);
-            batch.draw(stage.texture, 100 + 100 * (float) Math.cos(elapsed), 100 + 25 * (float) Math.sin(elapsed));
-            batch.end();
-        }*/
     }
+//
+//    private void drawTableCards(float delta) {
+//        for (SpriteBatch batch:stage.tableCardsSprites) {
+//            batch.begin();
+//            System.out.println(delta);
+//            batch.draw(stage.texture, 100 + 100 * (float) Math.cos(elapsed), 100 + 25 * (float) Math.sin(elapsed));
+//            batch.end();
+//        }
+//    }
 
     @Override
     public void resize(int width, int height) {

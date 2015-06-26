@@ -38,7 +38,7 @@ public class Game {
         LinkedList<Card> deck = new LinkedList<Card>();
         for (CardSuit suit : CardSuit.values()) {
             for (CardValue value : CardValue.values()) {
-                deck.add(new Card(suit, value, new Texture(Gdx.files.internal("cards/"+count+".png"))));
+                deck.add(new Card(suit, value, new Texture(Gdx.files.internal("libgdx-logo.png"))));
             }
         }
         return new Deck(deck);

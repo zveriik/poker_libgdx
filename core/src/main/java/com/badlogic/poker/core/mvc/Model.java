@@ -3,6 +3,7 @@ package com.badlogic.poker.core.mvc;
 import com.badlogic.poker.core.entity.Game;
 import com.badlogic.poker.core.entity.Player;
 import com.badlogic.poker.core.logic.Logic;
+import com.sun.rowset.internal.Row;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public class Model {
 	
 	Logic logic;
+	public final static int ROWS = 10;
+	public final static int COLUMNS = 50;
 
 	Player player = new Player();
 	

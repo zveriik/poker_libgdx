@@ -1,6 +1,7 @@
 package com.badlogic.poker.core.mvc;
 
 import com.badlogic.poker.core.entity.Game;
+import com.badlogic.poker.core.entity.Table;
 
 public class Controller implements ModelListener {
 
@@ -35,5 +36,9 @@ public class Controller implements ModelListener {
 	public void replaceCards() {
 		model.replaceCards();
 	}
+
+//	public Table getTable(){
+//		model.getTable();
+//	}
 
 }
