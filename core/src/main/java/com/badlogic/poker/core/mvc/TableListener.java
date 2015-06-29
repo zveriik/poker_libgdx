@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.entity.Card;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Aleksey_Zverkov on 6/26/2015.
  */
@@ -18,6 +21,11 @@ public class TableListener implements InputProcessor {
 
     Controller controller;
     Stage stage;
+    List<Integer> holds = new ArrayList<Integer>();
+
+    boolean firstTable = true;
+    boolean waitNewGame = false;
+    int count;
 
     public TableListener(Controller controller, Stage stage) {
         this.controller = controller;
@@ -33,18 +41,35 @@ public class TableListener implements InputProcessor {
         Actor card = table.findActor("" + count);
         boolean isHold = isHold(card);
 
-        if (i == Input.Keys.RIGHT && frame.getX() < 390) {
-            frame.setPosition(frame.getX() + 90, frame.getY());
+        if (firstTable) {
+            if (i == Input.Keys.RIGHT && frame.getX() < 390) {
+                frame.setPosition(frame.getX() + 90, frame.getY());
+            }
+            if (i == Input.Keys.LEFT && frame.getX() > 90) {
+                frame.setPosition(frame.getX() - 90, frame.getY());
+            }
+            if (i == Input.Keys.UP && !isHold) {
+                card.setPosition(card.getX(), card.getY() + 30);
+                count = (int) (card.getX() - 30) / 90;
+                holds.add(count);
+            }
+            if (i == Input.Keys.DOWN && isHold) {
+                System.out.println(isHold);
+                card.setPosition(card.getX(), card.getY() - 30);
+                count = (int) (card.getX() - 30) / 90;
+                holds.remove(count);
+            }
         }
-        if (i == Input.Keys.LEFT && frame.getX() > 90) {
-            frame.setPosition(frame.getX() - 90, frame.getY());
-        }
-        if (i == Input.Keys.UP && !isHold) {
-            card.setPosition(card.getX(), card.getY() + 30);
-        }
-        if (i == Input.Keys.DOWN && isHold) {
-            System.out.println(isHold);
-            card.setPosition(card.getX(), card.getY() - 30);
+        if (i == Input.Keys.SPACE || i == Input.Keys.ENTER) {
+            if (firstTable) {
+                firstTable = false;
+                if (waitNewGame) {
+                    startNewGame(table);
+                } else {
+//                    checkWin(table);
+                    waitNewGame = true;
+                }
+            }
         }
 
         return false;
@@ -52,7 +77,6 @@ public class TableListener implements InputProcessor {
 
     @Override
     public boolean keyUp(int i) {
-
         return false;
     }
 
@@ -66,10 +90,54 @@ public class TableListener implements InputProcessor {
 
         Group group = (Group) stage.getActors().first();
         Actor hitActor = group.hit(i, i1, false);
-        if (hitActor != null) {
-            int y = isHold(hitActor) ? -1 : 1;
-            hitActor.setPosition(hitActor.getX(), hitActor.getY() + y*30);
+        if (!firstTable) {
+            if (waitNewGame){
+                firstTable = true;
+                startNewGame(group);
+            } else {
+                waitNewGame = true;
+                //check win and draw
+
+                Image winCondition = controller.checkWinCondition();
+                winCondition.setPosition(100, 100);
+                group.clear();
+                group.addActor(winCondition);
+
+                holds.clear();
+            }
+        } else {
+            if (hitActor != null) {   //hit card for hold
+                int y = isHold(hitActor) ? -1 : 1;
+                hitActor.setPosition(hitActor.getX(), hitActor.getY() + y * 30);
+                count = (int) (hitActor.getX() - 30) / 90;
+                if (!isHold(hitActor))
+                    holds.remove(count);
+                else
+                    holds.add(count);
+
+            } else {
+            // redraw HOLDS cards
+                firstTable = false;
+                waitNewGame = false;
+
+                Image frame = group.findActor("frame");
+
+                group.clear();
+                group.addActor(frame);
+
+                controller.replaceCards(holds);
+                holds.clear();
+
+                Image[] table = controller.getTable();
+                for (int place = 0; place < table.length; place++) {
+                    Image img = table[place];
+                    img.setName("" + place);
+                    img.setPosition(30 + 90 * place, 90);
+                    group.addActor(img);
+                }
+            }
         }
+
         return false;
     }
 
@@ -85,10 +153,12 @@ public class TableListener implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int i, int i1) {
-        Group group = (Group) stage.getActors().first();
-        Actor cardBox = group.findActor("frame");
-        int x = i / 90 > 4 ? 4 : i / 90;
-        cardBox.setPosition(30 + 90 * (x), cardBox.getY());
+        if (firstTable) {
+            Group group = (Group) stage.getActors().first();
+            Actor cardBox = group.findActor("frame");
+            int x = i / 90 > 4 ? 4 : i / 90;
+            cardBox.setPosition(30 + 90 * (x), cardBox.getY());
+        }
         return false;
     }
 
@@ -98,7 +168,26 @@ public class TableListener implements InputProcessor {
     }
 
     private boolean isHold(Actor actor) {
-        System.out.println(actor.getY());
+//        System.out.println(actor.getY());
         return actor.getY() > 90;
     }
+
+    private void startNewGame(Group group) {
+        group.clear();
+        Image frame = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
+        frame.setName("frame");
+        frame.setPosition(30, 90);
+        group.addActor(frame);
+
+        Image[] images = controller.getTable();
+
+        for (int i = 0; i < images.length; i++) {
+            Image img = images[i];
+            img.setName("" + i);
+            img.setPosition(30 + 90 * i, 90);
+            group.addActor(img);
+        }
+
+    }
+
 }

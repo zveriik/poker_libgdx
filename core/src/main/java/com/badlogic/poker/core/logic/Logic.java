@@ -19,27 +19,6 @@ public class Logic {
         return game;
     }
 
-    public List<Integer> readHolds() {
-        List<Integer> choose = new ArrayList<Integer>();
-        boolean valid = false;
-        while (!valid) {
-            Scanner input = new Scanner(System.in);
-            System.out.print("Choose Holds [1-5]: ");
-            String numberString = input.nextLine();
-            numberString.replaceAll("\\D", "");
-            char[] charArray = numberString.toCharArray();
-            System.out.println(charArray);
-            for (int i = 0; i < charArray.length; i++) {
-                choose.add(Character.getNumericValue(charArray[i]));
-                valid = choose.get(i) <= 5;
-            }
-            if (!valid) choose.clear();
-        }
-        List<Integer> holds = new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 2, 3, 4, 5}));
-        holds.removeAll(choose);
-        return holds;
-    }
-
     public void createDeck() {
         game.createDeck();
     }
@@ -48,16 +27,19 @@ public class Logic {
         game.shuffleDeck();
     }
 
-    public void replaceCards(){
-
+    public WinCondition replaceCards(List<Integer> holds){
+        WinCondition winCondition = checkCombination();
+        Card[] cards = game.getTable().getCardsOnDesk();
+        for (Integer replace:holds){
+            cards[replace] = game.getDeck().removeFirst();
+        }
+        game.getTable().setCardsOnDesk(cards);
+        game.createDeck();
+        return winCondition;
     }
 
-    public void chooseCard(){
-
-    }
-
-    public WinCondition checkCombination(Table table) {
-        Card[] cardsOnDesk = table.getCardsOnDesk();
+    public WinCondition checkCombination() {
+        Card[] cardsOnDesk = game.getTable().getCardsOnDesk();
         WinCondition win = checkForKind(cardsOnDesk);
         return win;
     }
@@ -107,4 +89,5 @@ public class Logic {
 
         return checkForFlushAndStraight(cards);
     }
+
 }

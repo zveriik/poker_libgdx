@@ -12,14 +12,15 @@ public class Card {
 
     private CardValue value;
 
-    private Texture texture = new Texture(Gdx.files.internal("cards/1.png"));
+    private Texture texture;
 
     public Card() {
     }
 
-    public Card(CardSuit suit, CardValue value) {
+    public Card(CardSuit suit, CardValue value, Texture texture) {
         this.suit = suit;
         this.value = value;
+        this.texture = texture;
     }
 
     public Texture getTexture() {
@@ -48,7 +49,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card[suit=" + suit + ", value=" + value + "]";
+        return "Card[suit=" + suit + ", value=" + value + "]" + " [Texture: " + texture.toString();
     }
 
 }

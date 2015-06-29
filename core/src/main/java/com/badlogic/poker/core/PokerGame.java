@@ -31,8 +31,8 @@ public class PokerGame extends Game {
 		tableGroup.addActor(frame);
 
 		Image[] table = controller.getTable();
-
 		for(int i=0; i<table.length; i++){
+			System.out.println(table[i].toString());
 			Image img = table[i];
 			img.setName(""+i);
 			img.setPosition(30+90*i, 90);
@@ -48,6 +48,8 @@ public class PokerGame extends Game {
 		Gdx.input.setInputProcessor(tableListener);
 
 	}
+
+
 
 	@Override
 	public void dispose() {

@@ -1,5 +1,8 @@
 package com.badlogic.poker.core.entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
@@ -43,11 +46,13 @@ public class Game {
         this.table = table;
     }
 
+
     public Deck createDeck() {
+        int image = 1;
         LinkedList<Card> deck = new LinkedList<Card>();
         for (CardSuit suit : CardSuit.values()) {
             for (CardValue value : CardValue.values()) {
-                deck.add(new Card(suit, value));
+                deck.add(new Card(suit, value, new Texture(Gdx.files.internal("cards/" + image +".png"))));
             }
         }
         return new Deck(deck);
@@ -59,12 +64,13 @@ public class Game {
         deck.setDeck(cards);
     }
 
-    private void putCardOnTable(){
+    public void putCardOnTable(){
         Card[] cards = new Card[table.getCardsOnDesk().length];
         for (int i = 0; i < table.getCardsOnDesk().length; i++) {
             cards[i] = getDeck().removeFirst();
         }
         table.setCardsOnDesk(cards);
+        this.deck = createDeck();
     }
 
 
