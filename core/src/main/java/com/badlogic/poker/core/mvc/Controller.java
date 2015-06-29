@@ -1,44 +1,28 @@
 package com.badlogic.poker.core.mvc;
 
-import com.badlogic.poker.core.entity.Game;
-import com.badlogic.poker.core.entity.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.poker.core.entity.Card;
+import com.badlogic.poker.core.logic.Logic;
 
-public class Controller implements ModelListener {
+public class Controller {
 
-	private View view;
-	private Model model;
+    private Logic logic = new Logic();
 
-	@Override
-	public void onChange(final Game game) {
-		view.draw(game);
-	}
+    public Image[] getTable() {
+        Card[] cards = logic.getGame().getTable().getCardsOnDesk();
+        Image[] images = new Image[cards.length];
+        for (int i = 0; i < cards.length; i++) {
+            images[i] = new Image(cards[i].getTexture());
+        }
+        return images;
+    }
 
-	public void setView(final View view) {
-		this.view = view;
-	}
+    public void chooseCard() {
+        logic.chooseCard();
+    }
 
-	public void setModel(final Model model) {
-		this.model = model;
-	}
-
-	public void moveLeft() {
-		model.moveLeft();
-	}
-
-	public void moveRight() {
-		model.moveRight();
-	}
-
-	public void tapCard() {
-		model.tapCard();
-	}
-
-	public void replaceCards() {
-		model.replaceCards();
-	}
-
-//	public Table getTable(){
-//		model.getTable();
-//	}
+    public void replaceCards() {
+        logic.replaceCards();
+    }
 
 }

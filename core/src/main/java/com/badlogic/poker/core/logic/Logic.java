@@ -5,30 +5,18 @@ import com.badlogic.poker.core.entity.*;
 import java.util.*;
 
 /**
- * Created by Aleksey_Zverkov on 6/23/2015.
+ * Created by Zveriki on 09.02.2015.
  */
 public class Logic {
 
-    private Game game;
+    private Game game = new Game();
 
-    public Logic(Game game) {
-        this.game = game;
+    public Logic() {
+        createDeck();
     }
 
     public Game getGame() {
-        try {
-            return (Game) game.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Deck shuffleDeck(Deck deck) {
-        LinkedList<Card> cards = deck.getDeck();
-        Collections.shuffle(cards, new Random(System.nanoTime()));
-        deck.setDeck(cards);
-        return deck;
+        return game;
     }
 
     public List<Integer> readHolds() {
@@ -52,6 +40,22 @@ public class Logic {
         return holds;
     }
 
+    public void createDeck() {
+        game.createDeck();
+    }
+
+    public void shuffleDeck() {
+        game.shuffleDeck();
+    }
+
+    public void replaceCards(){
+
+    }
+
+    public void chooseCard(){
+
+    }
+
     public WinCondition checkCombination(Table table) {
         Card[] cardsOnDesk = table.getCardsOnDesk();
         WinCondition win = checkForKind(cardsOnDesk);
@@ -65,7 +69,7 @@ public class Logic {
         Collections.sort(checkList, new Comparator<Card>() {
             @Override
             public int compare(Card o1, Card o2) {
-                return o1.getSuit().ordinal() > o2.getSuit().ordinal() ? 1 : o1.getSuit().ordinal() < o2.getSuit().ordinal() ? -1 : 0;
+                return o1.getSuit().ordinal()>o2.getSuit().ordinal()?1:o1.getSuit().ordinal() <o2.getSuit().ordinal()?-1:0;
             }
         });
 
@@ -74,7 +78,7 @@ public class Logic {
         Collections.sort(checkList, new Comparator<Card>() {
             @Override
             public int compare(Card o1, Card o2) {
-                return o1.getValue().ordinal() > o2.getValue().ordinal() ? 1 : o1.getValue().ordinal() < o2.getValue().ordinal() ? -1 : 0;
+                return o1.getValue().ordinal()>o2.getValue().ordinal()?1:o1.getValue().ordinal() <o2.getValue().ordinal()?-1:0;
             }
         });
 
@@ -103,21 +107,4 @@ public class Logic {
 
         return checkForFlushAndStraight(cards);
     }
-
-    public boolean moveLeft() {
-        return true;
-    }
-
-    public boolean moveRight() {
-        return true;
-    }
-
-    public boolean tapCard(){
-        return true;
-    }
-
-    public boolean replaceCards(){
-        return true;
-    }
-
 }

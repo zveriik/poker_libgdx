@@ -24,19 +24,6 @@ public class PokerStage extends Stage {
     public void init() {
 
         System.out.println("Init Stage");
-
-        Group group = new Group();
-        this.addActor(group);
-        CardBox[] sprites = new CardBox[5];
-
-        for (int i=0; i<5; i++) {
-//			frames[i] = frame;
-//			frames[i].setPosition(10+i*90, 50);
-//			group.addActor(frames[i]);
-            sprites[i] = new CardBox(30+i*90, 90, new Texture(Gdx.files.internal("cards/frame.png")));
-            group.addActor(sprites[i]);
-
-        }
     }
 
     @Override

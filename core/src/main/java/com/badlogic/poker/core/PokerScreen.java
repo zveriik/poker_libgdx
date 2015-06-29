@@ -3,10 +3,7 @@ package com.badlogic.poker.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.poker.core.mvc.CardBox;
 
 import static com.badlogic.poker.core.Utils.getRGBColor;
 
@@ -21,8 +18,6 @@ public class PokerScreen implements Screen {
     @Override
     public void show() {
         stage = new PokerStage();
-        CardBox cardActor = new CardBox();
-        stage.addActor(cardActor);
         stage.init();
     }
 

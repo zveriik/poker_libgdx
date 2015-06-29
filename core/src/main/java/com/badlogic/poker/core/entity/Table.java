@@ -6,6 +6,7 @@ package com.badlogic.poker.core.entity;
 public class Table {
 
     private final Card[] cardsOnDesk = new Card[5];
+    private boolean isEmpty = true;
 
     public Table() {
     }
@@ -15,11 +16,20 @@ public class Table {
     }
 
     public void setCardsOnDesk(Card[] cards){
+        isEmpty = false;
         if (cards.length == cardsOnDesk.length) {
             for (int i = 0; i <cardsOnDesk.length; i++){
                 cardsOnDesk[i] = cards[i];
             }
         }
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setIsEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.badlogic.poker.core.mvc;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.entity.Card;
 
 /**
@@ -23,19 +26,33 @@ public class TableListener implements InputProcessor {
 
     @Override
     public boolean keyDown(int i) {
-        Group group = (Group)stage.getActors().first();
-        Actor cardBox = group.findActor("frame");
-        if(i == Input.Keys.RIGHT && cardBox.getX() < 390){
-            cardBox.setPosition(cardBox.getX() + 90, cardBox.getY());
+
+        Group table = (Group) stage.getActors().first();
+        Actor frame = table.findActor("frame");
+        int count = (int) (frame.getX() - 30) / 90;
+        Actor card = table.findActor("" + count);
+        boolean isHold = isHold(card);
+
+        if (i == Input.Keys.RIGHT && frame.getX() < 390) {
+            frame.setPosition(frame.getX() + 90, frame.getY());
         }
-        if(i == Input.Keys.LEFT && cardBox.getX() > 90){
-            cardBox.setPosition(cardBox.getX() - 90, cardBox.getY());
+        if (i == Input.Keys.LEFT && frame.getX() > 90) {
+            frame.setPosition(frame.getX() - 90, frame.getY());
         }
+        if (i == Input.Keys.UP && !isHold) {
+            card.setPosition(card.getX(), card.getY() + 30);
+        }
+        if (i == Input.Keys.DOWN && isHold) {
+            System.out.println(isHold);
+            card.setPosition(card.getX(), card.getY() - 30);
+        }
+
         return false;
     }
 
     @Override
     public boolean keyUp(int i) {
+
         return false;
     }
 
@@ -46,11 +63,13 @@ public class TableListener implements InputProcessor {
 
     @Override
     public boolean touchDown(int i, int i1, int i2, int i3) {
-        Vector2 coord = stage.screenToStageCoordinates(new Vector2((float) i, (float) i2));
-        Actor hitActor = stage.hit(coord.x, coord.y, false);
 
-        if(hitActor != null)
-            System.out.println("HIT: " + hitActor.getName());
+        Group group = (Group) stage.getActors().first();
+        Actor hitActor = group.hit(i, i1, false);
+        if (hitActor != null) {
+            int y = isHold(hitActor) ? -1 : 1;
+            hitActor.setPosition(hitActor.getX(), hitActor.getY() + y*30);
+        }
         return false;
     }
 
@@ -66,14 +85,20 @@ public class TableListener implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int i, int i1) {
-        Group group = (Group)stage.getActors().first();
+        Group group = (Group) stage.getActors().first();
         Actor cardBox = group.findActor("frame");
-        cardBox.setPosition(30+90*(i/90), 90);
+        int x = i / 90 > 4 ? 4 : i / 90;
+        cardBox.setPosition(30 + 90 * (x), cardBox.getY());
         return false;
     }
 
     @Override
     public boolean scrolled(int i) {
         return false;
+    }
+
+    private boolean isHold(Actor actor) {
+        System.out.println(actor.getY());
+        return actor.getY() > 90;
     }
 }

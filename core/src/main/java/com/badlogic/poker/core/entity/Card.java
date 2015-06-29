@@ -1,5 +1,6 @@
 package com.badlogic.poker.core.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -11,17 +12,21 @@ public class Card {
 
     private CardValue value;
 
-    private boolean faceUp;
-
-    private Texture texture;
+    private Texture texture = new Texture(Gdx.files.internal("cards/1.png"));
 
     public Card() {
     }
 
-    public Card(CardSuit suit, CardValue value, Texture texture) {
+    public Card(CardSuit suit, CardValue value) {
         this.suit = suit;
         this.value = value;
-        this.faceUp = false;
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setTexture(Texture texture) {
         this.texture = texture;
     }
 
@@ -39,22 +44,6 @@ public class Card {
 
     public void setValue(CardValue value) {
         this.value = value;
-    }
-
-    public boolean isFaceUp() {
-        return faceUp;
-    }
-
-    public void setFaceUp(boolean faceUp) {
-        this.faceUp = faceUp;
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
     }
 
     @Override
