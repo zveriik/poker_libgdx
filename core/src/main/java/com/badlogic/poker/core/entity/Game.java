@@ -19,6 +19,7 @@ public class Game {
     public Game(Player player) {
         this.player = player;
         shuffleDeck();
+        putCardOnTable();
     }
 
     public Game() {
@@ -37,8 +38,10 @@ public class Game {
         return deck;
     }
 
-    public Table getTable() {
-        putCardOnTable();
+    public Table getTable(String method) {
+        for(Card card:table.getCardsOnDesk()) {
+            System.out.println("method: "+ method+" ----- "+card);
+        }
         return table;
     }
 
@@ -50,9 +53,10 @@ public class Game {
     public Deck createDeck() {
         int image = 1;
         LinkedList<Card> deck = new LinkedList<Card>();
-        for (CardSuit suit : CardSuit.values()) {
-            for (CardValue value : CardValue.values()) {
+        for (CardValue value : CardValue.values()) {
+            for (CardSuit suit : CardSuit.values()) {
                 deck.add(new Card(suit, value, new Texture(Gdx.files.internal("cards/" + image +".png"))));
+                image++;
             }
         }
         return new Deck(deck);
@@ -65,12 +69,25 @@ public class Game {
     }
 
     public void putCardOnTable(){
-        Card[] cards = new Card[table.getCardsOnDesk().length];
-        for (int i = 0; i < table.getCardsOnDesk().length; i++) {
-            cards[i] = getDeck().removeFirst();
+        if(table.isEmpty()) {
+            Card[] cards = new Card[table.getCardsOnDesk().length];
+            for (int i = 0; i < table.getCardsOnDesk().length; i++) {
+                cards[i] = getDeck().removeFirst();
+            }
+            table.setCardsOnDesk(cards);
+            table.setIsEmpty(false);
         }
-        table.setCardsOnDesk(cards);
-        this.deck = createDeck();
+    }
+
+    public void drawTable(){
+        if (!table.isEmpty()) {
+            Card[] tableCards = table.getCardsOnDesk();
+            for(Card card:tableCards){
+                deck.getDeck().add(card);
+            }
+            table.setIsEmpty(true);
+            this.shuffleDeck();
+        }
     }
 
 

@@ -9,10 +9,10 @@ import java.util.*;
  */
 public class Logic {
 
-    private Game game = new Game();
+    private Game game;
 
     public Logic() {
-        createDeck();
+        game = new Game();
     }
 
     public Game getGame() {
@@ -27,20 +27,27 @@ public class Logic {
         game.shuffleDeck();
     }
 
-    public WinCondition replaceCards(List<Integer> holds){
-        WinCondition winCondition = checkCombination();
-        Card[] cards = game.getTable().getCardsOnDesk();
-        for (Integer replace:holds){
+    public void drawTable(){
+        game.drawTable();
+    }
+
+    public void replaceCards(Set<Integer> holds){
+
+        Card[] cards = game.getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
+        for (Integer replace : holds) {
+            game.getDeck().addLast(cards[replace]);
             cards[replace] = game.getDeck().removeFirst();
         }
-        game.getTable().setCardsOnDesk(cards);
-        game.createDeck();
-        return winCondition;
+        game.getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).setCardsOnDesk(cards);
+        game.shuffleDeck();
+
     }
 
     public WinCondition checkCombination() {
-        Card[] cardsOnDesk = game.getTable().getCardsOnDesk();
+        Card[] cardsOnDesk = game.getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
+        System.out.println("cards on table: " + cardsOnDesk.length);
         WinCondition win = checkForKind(cardsOnDesk);
+        game.drawTable();
         return win;
     }
 

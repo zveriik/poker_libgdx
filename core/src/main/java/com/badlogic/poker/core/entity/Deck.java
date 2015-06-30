@@ -28,6 +28,10 @@ public class Deck {
         return deck.removeFirst();
     }
 
+    public void addLast(Card card){
+        deck.add(card);
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

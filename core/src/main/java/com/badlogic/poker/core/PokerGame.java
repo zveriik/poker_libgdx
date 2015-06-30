@@ -25,28 +25,8 @@ public class PokerGame extends Game {
 		Group tableGroup = new Group();
 		stage.addActor(tableGroup);
 
-		Image  frame = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
-		frame.setPosition(30, 90);
-		frame.setName("frame");
-		tableGroup.addActor(frame);
-
-		Image[] table = controller.getTable();
-		for(int i=0; i<table.length; i++){
-			System.out.println(table[i].toString());
-			Image img = table[i];
-			img.setName(""+i);
-			img.setPosition(30+90*i, 90);
-			tableGroup.addActor(img);
-		}
-
-
-//		Image card = new Image(new Texture(Gdx.files.internal("cards/1.png")));
-//		card.setName("2");
-//		card.setPosition(120, 90);
-
-
+		System.out.println(tableGroup.toString());
 		Gdx.input.setInputProcessor(tableListener);
-
 	}
 
 
