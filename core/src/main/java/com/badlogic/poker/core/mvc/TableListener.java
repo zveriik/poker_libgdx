@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Scaling;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class TableListener implements InputProcessor {
     boolean start = true;
     boolean firstTable = true;
     boolean waitNewGame = false;
-    int count;
+    int count = 0;
 
     public TableListener(Controller controller, Stage stage) {
         this.controller = controller;
@@ -37,10 +38,10 @@ public class TableListener implements InputProcessor {
         Group table = (Group) stage.getActors().first();
         if (start) {
             start = false;
-            Image selector = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
-            selector.setPosition(25, 50);
-            selector.setName("frame");
-            table.addActor(selector);
+//            Image selector = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
+//            selector.setPosition(25, 50);
+//            selector.setName("frame");
+//            table.addActor(selector);
 
             Image[] tableTable = controller.startNewGame();
             for (int j = 0; j < tableTable.length; j++) {
@@ -51,16 +52,22 @@ public class TableListener implements InputProcessor {
             }
         } else {
             Actor frame = table.findActor("frame");
-            int count = (int) (frame.getX()) / 90 > 4 ? 4 : (int) (frame.getX() ) / 90;
+//            int count = (int) (frame.getX()) / 90 > 4 ? 4 : (int) (frame.getX() ) / 90;
             Actor card = table.findActor("" + count);
             boolean isHold = isHold(card);
 
             if (firstTable && !start) {
                 if (i == Input.Keys.RIGHT && count < 4) {
-                    frame.setPosition(frame.getX() + 90, frame.getY());
+                    table.findActor("" + count).setScale(1f);
+                    count++;
+                    table.findActor("" + count).setScale(1.075f);
+//                    frame.setPosition(frame.getX() + 90, frame.getY());
                 }
                 if (i == Input.Keys.LEFT && count > 0) {
-                    frame.setPosition(frame.getX() - 90, frame.getY());
+//                    frame.setPosition(frame.getX() - 90, frame.getY());
+                    table.findActor("" + count).setScale(1f);
+                    count--;
+                    table.findActor("" + count).setScale(1.075f);
                 }
                 if (i == Input.Keys.UP && !isHold) {
 //                    count = (int) (frame.getX() - 30) / 90;
@@ -102,10 +109,10 @@ public class TableListener implements InputProcessor {
                     firstTable = false;
                     waitNewGame = false;
 
-                    frame = table.findActor("frame");
-                    System.out.println(frame.getY());
+//                    frame = table.findActor("frame");
+//                    System.out.println(frame.getY());
                     table.clear();
-                    table.addActor(frame);
+//                    table.addActor(frame);
 
                     controller.replaceCards(holds);
                     holds.clear();
@@ -144,10 +151,10 @@ public class TableListener implements InputProcessor {
 
             System.out.println("Start Game --------------");
 
-            Image selector = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
-            selector.setPosition(25, 50);
-            selector.setName("frame");
-            group.addActor(selector);
+//            Image selector = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
+//            selector.setPosition(25, 50);
+//            selector.setName("frame");
+//            group.addActor(selector);
 
             Image[] tableTable = controller.startNewGame();
             for (int j = 0; j < tableTable.length; j++) {
@@ -196,10 +203,10 @@ public class TableListener implements InputProcessor {
                     firstTable = false;
                     waitNewGame = false;
 
-                    Image frame = group.findActor("frame");
-                    System.out.println(frame.getY());
+//                    Image frame = group.findActor("frame");
+//                    System.out.println(frame.getY());
                     group.clear();
-                    group.addActor(frame);
+//                    group.addActor(frame);
 
                     controller.replaceCards(holds);
                     holds.clear();
@@ -232,9 +239,15 @@ public class TableListener implements InputProcessor {
     public boolean mouseMoved(int i, int i1) {
         if (firstTable && !start) {
             Group group = (Group) stage.getActors().first();
-            Actor cardBox = group.findActor("frame");
-            int x = i / 90 > 4 ? 4 : i / 90;
-            cardBox.setPosition(30 + 90 * (x), cardBox.getY());
+            int curentPoint = i / 90 > 4 ? 4 : i / 90;
+            if (count != curentPoint){
+                group.findActor("" + count).setScale(1f);
+                group.findActor("" + curentPoint).setScale(1.075f);
+                count = curentPoint;
+            }
+//            count = i / 90 > 4 ? 4 : i / 90;
+//            Actor cardBox = group.findActor("" + count);
+//            cardBox.setScale(1.075f);
         }
         return false;
     }
@@ -251,10 +264,10 @@ public class TableListener implements InputProcessor {
 
     private void startNewGame(Group group) {
         group.clear();
-        Image frame = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
-        frame.setName("frame");
-        frame.setPosition(25, 50);
-        group.addActor(frame);
+//        Image frame = new Image(new Texture(Gdx.files.internal("cards/frame.png")));
+//        frame.setName("frame");
+//        frame.setPosition(25, 50);
+//        group.addActor(frame);
 
         Image[] images = controller.startNewGame();
 
