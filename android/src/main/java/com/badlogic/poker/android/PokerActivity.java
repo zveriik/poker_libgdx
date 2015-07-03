@@ -1,11 +1,9 @@
 package com.badlogic.poker.android;
 
-import com.badlogic.poker.core.Poker;
-
 import android.os.Bundle;
-
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.badlogic.poker.core.PokerGame;
 
 public class PokerActivity extends AndroidApplication {
 
@@ -13,6 +11,6 @@ public class PokerActivity extends AndroidApplication {
 	public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-			initialize(new Poker(), config);
+			initialize(new PokerGame(), config);
 	}
 }

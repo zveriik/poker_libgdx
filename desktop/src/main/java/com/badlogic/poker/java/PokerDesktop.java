@@ -4,7 +4,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.poker.core.Poker;
 import com.badlogic.poker.core.PokerGame;
 
 import static com.badlogic.poker.core.Utils.getRGBColor;

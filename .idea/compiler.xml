@@ -31,11 +31,21 @@
         <processorPath useClasspath="true" />
         <module name="poker-desktop" />
       </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="poker-android" />
+        <module name="poker-html" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="poker" target="1.6" />
+      <module name="poker-android" target="1.5" />
       <module name="poker-core" target="1.6" />
       <module name="poker-desktop" target="1.6" />
+      <module name="poker-html" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

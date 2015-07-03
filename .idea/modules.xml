@@ -7,8 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/desktop/src/main/main2.iml" filepath="$PROJECT_DIR$/desktop/src/main/main2.iml" />
       <module fileurl="file://$PROJECT_DIR$/android/src/main/main3.iml" filepath="$PROJECT_DIR$/android/src/main/main3.iml" />
       <module fileurl="file://$PROJECT_DIR$/poker.iml" filepath="$PROJECT_DIR$/poker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/poker-android.iml" filepath="$PROJECT_DIR$/android/poker-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/poker-core.iml" filepath="$PROJECT_DIR$/core/poker-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/desktop/poker-desktop.iml" filepath="$PROJECT_DIR$/desktop/poker-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/html/poker-html.iml" filepath="$PROJECT_DIR$/html/poker-html.iml" />
     </modules>
   </component>
 </project>
