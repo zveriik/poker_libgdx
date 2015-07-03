@@ -16,8 +16,8 @@ import com.badlogic.poker.core.mvc.TableListener;
 
 public class PokerGame extends Game {
 
-	public final static int WINDOW_WIDTH = 500;
-	public final static int WINDOW_HEIGHT = 300;
+	public final static int WINDOW_WIDTH = 800;
+	public final static int WINDOW_HEIGHT = 480;
 
 	PokerStage stage;
 	Controller controller;
