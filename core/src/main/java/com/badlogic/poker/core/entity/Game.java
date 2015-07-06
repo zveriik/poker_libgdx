@@ -13,16 +13,18 @@ import java.util.Random;
 public class Game {
 
     private Player player;
-    private Deck deck = createDeck();
+    private Deck deck = new Deck();
     private Table table = new Table();
 
-    public Game(Player player) {
-        this.player = player;
-        shuffleDeck();
-        putCardOnTable();
-    }
+//    public Game(Player player) {
+//        this.player = player;
+//        deck = createDeck();
+//        shuffleDeck();
+//        putCardOnTable();
+//    }
 
     public Game() {
+        deck = createDeck();
         shuffleDeck();
     }
 
@@ -55,7 +57,7 @@ public class Game {
         LinkedList<Card> deck = new LinkedList<Card>();
         for (CardValue value : CardValue.values()) {
             for (CardSuit suit : CardSuit.values()) {
-                deck.add(new Card(suit, value, new Texture(Gdx.files.internal("cards/" + image +".png"))));
+                deck.add(new Card(suit, value, "cards/" + image +".png"));
                 image++;
             }
         }

@@ -1,26 +1,24 @@
 package com.badlogic.poker.core.mvc;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.poker.core.PokerGame;
-import com.badlogic.poker.core.PokerStage;
 
 import static com.badlogic.poker.core.Utils.getRGBColor;
 
 /**
  * Created by Aleksey_Zverkov on 7/1/2015.
  */
-public class MainScreen implements Screen {
+public class MainScreen extends MyScreen {
 
-    PokerGame game;
-    PokerStage stage;
-    TableListener tableListener;
+    GameScreenListener listener;
 
     public MainScreen(PokerGame game) {
-        this.game = game;
-        Gdx.input.setInputProcessor(tableListener);
+        super(game);
+        initScreen();
+        Gdx.input.setInputProcessor(new GameScreenListener(game.controller, stage));
     }
 
     @Override
@@ -28,40 +26,20 @@ public class MainScreen implements Screen {
         Color bgColor = getRGBColor(0, 255, 255);
         Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        stage.draw();
-        if (Gdx.input.isTouched()){
-            game.setScreen(game.startScreen);
-        }
+
+//        if (Gdx.input.isTouched()){
+//            game.setScreen(new StartScreen(game));
+//        }
 
     }
 
-    @Override
-    public void resize(int width, int height) {
+    private void initScreen() {
+        Group tableGroup = new Group();
+        Group background = new Group();
+        stage.addActor(background);
+        stage.addActor(tableGroup);
 
+        System.out.println("Main Screen: Actors added");
     }
 
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
 }

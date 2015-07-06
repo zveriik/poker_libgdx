@@ -17,14 +17,12 @@ import com.badlogic.poker.core.mvc.*;
 public class PokerStage extends Stage {
 
     public PokerStage() {
-        setViewport(new ScreenViewport());
+        super();
         System.out.println("Create Stage");
     }
-
-    public void init() {
-
-        System.out.println("Init Stage");
-    }
+//    public void init() {
+//        System.out.println("Init Stage");
+//    }
 
     @Override
     public void draw() {

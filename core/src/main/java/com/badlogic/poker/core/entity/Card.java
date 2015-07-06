@@ -12,22 +12,22 @@ public class Card {
 
     private CardValue value;
 
-    private Texture texture;
+    private String texture;
 
     public Card() {
     }
 
-    public Card(CardSuit suit, CardValue value, Texture texture) {
+    public Card(CardSuit suit, CardValue value, String texture) {
         this.suit = suit;
         this.value = value;
         this.texture = texture;
     }
 
-    public Texture getTexture() {
+    public String getTexture() {
         return texture;
     }
 
-    public void setTexture(Texture texture) {
+    public void setTexture(String texture) {
         this.texture = texture;
     }
 

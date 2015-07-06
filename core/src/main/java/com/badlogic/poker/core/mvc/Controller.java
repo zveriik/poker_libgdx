@@ -19,7 +19,7 @@ public class Controller {
         Card[] cards = logic.getGame().getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
         Image[] images = new Image[cards.length];
         for (int i = 0; i < cards.length; i++) {
-            images[i] = new Image(cards[i].getTexture());
+            images[i] = new Image(new Texture(cards[i].getTexture()));
         }
         return images;
     }

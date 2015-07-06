@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
+import com.badlogic.poker.core.PokerStage;
 
 
 import java.util.HashSet;
@@ -15,10 +16,10 @@ import java.util.Set;
 /**
  * Created by Aleksey_Zverkov on 6/26/2015.
  */
-public class TableListener implements InputProcessor {
+public class GameScreenListener implements InputProcessor {
 
     Controller controller;
-    Stage stage;
+    PokerStage stage;
     Set<Integer> holds = new HashSet<Integer>();
 
     boolean start = true;
@@ -26,7 +27,7 @@ public class TableListener implements InputProcessor {
     boolean waitNewGame = false;
     int count = 0;
 
-    public TableListener(Controller controller, Stage stage) {
+    public GameScreenListener(Controller controller, PokerStage stage) {
         this.controller = controller;
         this.stage = stage;
     }
@@ -51,14 +52,14 @@ public class TableListener implements InputProcessor {
 
             if (firstTable && !start) {
                 if (i == Input.Keys.RIGHT && count < 4) {
-                    table.findActor("" + count).setScale(1f);
+                    scaleCard(table, count, false);
                     count++;
-                    table.findActor("" + count).setScale(1.075f);
+                    scaleCard(table, count, true);
                 }
                 if (i == Input.Keys.LEFT && count > 0) {
-                    table.findActor("" + count).setScale(1f);
+                    scaleCard(table, count, false);
                     count--;
-                    table.findActor("" + count).setScale(1.075f);
+                    scaleCard(table, count, true);
                 }
                 if (i == Input.Keys.UP && !isHold) {
                     card.setPosition(card.getX(), card.getY() + 30);
@@ -207,8 +208,8 @@ public class TableListener implements InputProcessor {
             Group group = (Group) stage.getActors().first();
             int currentPoint = i / 90 > 4 ? 4 : i / 90;
             if (count != currentPoint) {
-                group.findActor("" + count).setScale(1f);
-                group.findActor("" + currentPoint).setScale(1.075f);
+                scaleCard(group, count, false);
+                scaleCard(group, currentPoint, true);
                 count = currentPoint;
             }
         }
@@ -218,6 +219,15 @@ public class TableListener implements InputProcessor {
     @Override
     public boolean scrolled(int i) {
         return false;
+    }
+
+    private void scaleCard(Group table,  int count, boolean select) {
+        Actor actor = table.findActor("" + count);
+        float x = actor.getX();
+        float y = actor.getY();
+        actor.setOrigin(actor.getCenterX(), actor.getCenterY());
+        actor.setScale(select?1.08f:1f);
+        actor.setOrigin(x, y);
     }
 
     private boolean isHold(Actor actor) {
