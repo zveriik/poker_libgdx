@@ -1,5 +1,6 @@
 package com.badlogic.poker.core.mvc;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
@@ -35,7 +36,7 @@ public class GameScreenListener implements InputProcessor {
     @Override
     public boolean keyDown(int i) {
 
-        Group table = (Group) stage.getActors().first();
+        Group table = (Group) stage.getActors().peek();
 
         Actor card = table.findActor("" + count);
         boolean isHold = isHold(card);
@@ -117,7 +118,7 @@ public class GameScreenListener implements InputProcessor {
 
         Vector2 coord = stage.screenToStageCoordinates(new Vector2(i, i1));
 
-        Group group = (Group) stage.getActors().first();
+        Group group = (Group) stage.getActors().peek();
         Actor hitActor = group.hit(coord.x, coord.y, false);
 
         System.out.println("Mouse Hit X,Y: " + i + ", "+i1);
@@ -134,7 +135,7 @@ public class GameScreenListener implements InputProcessor {
                 //check win and draw
 
                 Image winCondition = controller.checkWinCondition();
-                winCondition.setPosition((PokerGame.WINDOW_WIDTH - winCondition.getWidth()) / 2, (PokerGame.WINDOW_HEIGHT - winCondition.getHeight()) / 2);
+                winCondition.setPosition(Gdx.graphics.getWidth()/2 - winCondition.getWidth() / 2, Gdx.graphics.getWidth()/2 - winCondition.getHeight() / 2);
                 group.clear();
                 group.addActor(winCondition);
 
@@ -188,7 +189,7 @@ public class GameScreenListener implements InputProcessor {
     @Override
     public boolean mouseMoved(int i, int i1) {
         if (firstTable) {
-            Group group = (Group) stage.getActors().first();
+            Group group = (Group) stage.getActors().peek();
             int currentPoint = i / 90 > 4 ? 4 : i / 90;
             if (count != currentPoint) {
                 scaleCard(group, count, false);

@@ -1,7 +1,9 @@
 package com.badlogic.poker.core.mvc;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
 
@@ -31,6 +33,9 @@ public class MainScreen extends MyScreen {
     }
 
     private void initScreen() {
+        Image table = new Image(new Texture(Gdx.files.internal("cards/table.jpg")));
+        table.setTouchable(Touchable.disabled);
+        stage.addActor(table);
         Group tableGroup = new Group();
         stage.addActor(tableGroup);
 
