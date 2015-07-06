@@ -2,8 +2,10 @@ package com.badlogic.poker.core.mvc;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
 
 
@@ -38,6 +40,8 @@ public class StartScreen extends MyScreen {
     private void initScreen(){
         Group background = new Group();
         stage.addActor(background);
+        Image bg = new Image(new Texture(Gdx.files.internal("poker_start.jpg")));
+        background.addActor(bg);
 
         System.out.println("Start Screen: Actors added");
     }

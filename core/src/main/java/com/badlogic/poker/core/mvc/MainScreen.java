@@ -31,7 +31,7 @@ public class MainScreen extends MyScreen {
     }
 
     private void initScreen() {
-        Image table = new Image(new Texture(Gdx.files.internal("cards/table.jpg")));
+        Image table = new Image(new Texture(Gdx.files.internal("poker-table.jpg")));
         table.setTouchable(Touchable.disabled);
         stage.addActor(table);
         Group tableGroup = new Group();
