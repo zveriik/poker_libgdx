@@ -19,7 +19,9 @@ public class Controller {
         Card[] cards = logic.getGame().getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
         Image[] images = new Image[cards.length];
         for (int i = 0; i < cards.length; i++) {
-            images[i] = new Image(new Texture(cards[i].getTexture()));
+            Image img = new Image(new Texture(cards[i].getTexture()));
+            img.setOrigin(img.getCenterX(), img.getCenterY());
+            images[i] = img;
         }
         return images;
     }
@@ -40,5 +42,11 @@ public class Controller {
     }
 
 
+    public String getMoney() {
+        return logic.getMoney();
+    }
 
+    public boolean checkEnoughMoney() {
+        return logic.checkEnoughMoney();
+    }
 }

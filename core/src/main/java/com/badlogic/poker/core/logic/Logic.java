@@ -12,7 +12,7 @@ public class Logic {
     private Game game;
 
     public Logic() {
-        game = new Game();
+        game = new Game(new Player(10, 1));
     }
 
     public Game getGame() {
@@ -48,7 +48,12 @@ public class Logic {
         System.out.println("cards on table: " + cardsOnDesk.length);
         WinCondition win = checkForKind(cardsOnDesk);
         game.drawTable();
+        game.changeMoney(win.getCost());
         return win;
+    }
+
+    public String getMoney(){
+        return String.valueOf(game.getPlayer().getCash());
     }
 
     private WinCondition checkForFlushAndStraight(Card[] cards) {
@@ -97,4 +102,7 @@ public class Logic {
         return checkForFlushAndStraight(cards);
     }
 
+    public boolean checkEnoughMoney() {
+        return game.getPlayer().getCash()<game.getPlayer().getBet();
+    }
 }

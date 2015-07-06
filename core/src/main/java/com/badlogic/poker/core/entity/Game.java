@@ -16,14 +16,8 @@ public class Game {
     private Deck deck = new Deck();
     private Table table = new Table();
 
-//    public Game(Player player) {
-//        this.player = player;
-//        deck = createDeck();
-//        shuffleDeck();
-//        putCardOnTable();
-//    }
-
-    public Game() {
+    public Game(Player player) {
+        this.player = player;
         deck = createDeck();
         shuffleDeck();
     }
@@ -41,8 +35,8 @@ public class Game {
     }
 
     public Table getTable(String method) {
-        for(Card card:table.getCardsOnDesk()) {
-            System.out.println("method: "+ method+" ----- "+card);
+        for (Card card : table.getCardsOnDesk()) {
+            System.out.println("method: " + method + " ----- " + card);
         }
         return table;
     }
@@ -57,7 +51,7 @@ public class Game {
         LinkedList<Card> deck = new LinkedList<Card>();
         for (CardValue value : CardValue.values()) {
             for (CardSuit suit : CardSuit.values()) {
-                deck.add(new Card(suit, value, "cards/" + image +".png"));
+                deck.add(new Card(suit, value, "cards/" + image + ".png"));
                 image++;
             }
         }
@@ -70,8 +64,8 @@ public class Game {
         deck.setDeck(cards);
     }
 
-    public void putCardOnTable(){
-        if(table.isEmpty()) {
+    public void putCardOnTable() {
+        if (table.isEmpty()) {
             Card[] cards = new Card[table.getCardsOnDesk().length];
             for (int i = 0; i < table.getCardsOnDesk().length; i++) {
                 cards[i] = getDeck().removeFirst();
@@ -81,10 +75,10 @@ public class Game {
         }
     }
 
-    public void drawTable(){
+    public void drawTable() {
         if (!table.isEmpty()) {
             Card[] tableCards = table.getCardsOnDesk();
-            for(Card card:tableCards){
+            for (Card card : tableCards) {
                 deck.getDeck().add(card);
             }
             table.setIsEmpty(true);
@@ -92,5 +86,8 @@ public class Game {
         }
     }
 
+    public void changeMoney(int change) {
+        player.setCash(player.getCash() + change*player.getBet());
+    }
 
 }

@@ -12,6 +12,11 @@ public class Player {
     public Player() {
     }
 
+    public Player(int cash, int bet) {
+        this.cash = cash;
+        this.bet = bet;
+    }
+
     public Player(String name, int cash, int bet) {
         this.name = name;
         this.cash = cash;

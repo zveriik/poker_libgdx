@@ -1,9 +1,8 @@
 package com.badlogic.poker.core.mvc;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
 
 import static com.badlogic.poker.core.Utils.getRGBColor;
@@ -13,8 +12,6 @@ import static com.badlogic.poker.core.Utils.getRGBColor;
  */
 public class MainScreen extends MyScreen {
 
-    GameScreenListener listener;
-
     public MainScreen(PokerGame game) {
         super(game);
         initScreen();
@@ -23,21 +20,27 @@ public class MainScreen extends MyScreen {
 
     @Override
     public void render(float delta) {
-        Color bgColor = getRGBColor(0, 255, 255);
-        Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-
-//        if (Gdx.input.isTouched()){
-//            game.setScreen(new StartScreen(game));
-//        }
-
+        super.render(delta);
+        if (game.controller.checkEnoughMoney()){
+            dispose();
+            game.setScreen(new EndScreen(game));
+        }
+        game.batch.begin();
+        game.font.draw(game.batch, "MONEY: " + game.controller.getMoney(), 600, 350);
+        game.batch.end();
     }
 
     private void initScreen() {
         Group tableGroup = new Group();
-        Group background = new Group();
-        stage.addActor(background);
         stage.addActor(tableGroup);
+
+        Image[] tableTable = game.controller.startNewGame();
+        for (int j = 0; j < tableTable.length; j++) {
+            Image img = tableTable[j];
+            img.setName("" + j);
+            img.setPosition(30 + 90 * j, 90);
+            tableGroup.addActor(img);
+        }
 
         System.out.println("Main Screen: Actors added");
     }
