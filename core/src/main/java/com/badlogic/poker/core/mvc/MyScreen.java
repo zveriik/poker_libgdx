@@ -3,10 +3,8 @@ package com.badlogic.poker.core.mvc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.poker.core.PokerGame;
 import com.badlogic.poker.core.PokerStage;
 
@@ -25,7 +23,7 @@ public abstract class MyScreen implements Screen{
         this.game = game;
         this.stage = game.stage;
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 400);
+        camera.setToOrtho(false, 800, 480);
     }
 
     @Override

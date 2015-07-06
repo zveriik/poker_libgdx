@@ -1,8 +1,5 @@
 package com.badlogic.poker.core.entity;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-
 /**
  * Created by Zveriki on 09.02.2015.
  */

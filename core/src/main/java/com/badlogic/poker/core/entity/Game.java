@@ -1,8 +1,5 @@
 package com.badlogic.poker.core.entity;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;

@@ -3,8 +3,7 @@ package com.badlogic.poker.core.mvc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.poker.core.PokerGame;
-import com.badlogic.poker.core.mvc.GameScreenListener;
-import com.badlogic.poker.core.mvc.MyScreen;
+
 
 /**
  * Created by Aleksey_Zverkov on 7/6/2015.

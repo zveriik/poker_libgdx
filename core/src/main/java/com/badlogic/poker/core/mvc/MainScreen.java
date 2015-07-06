@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
 
-import static com.badlogic.poker.core.Utils.getRGBColor;
-
 /**
  * Created by Aleksey_Zverkov on 7/1/2015.
  */
@@ -28,7 +26,7 @@ public class MainScreen extends MyScreen {
             game.setScreen(new EndScreen(game));
         }
         game.batch.begin();
-        game.font.draw(game.batch, "MONEY: " + game.controller.getMoney(), 600, 350);
+        game.font.draw(game.batch, "MONEY: " + game.controller.getMoney(), 600, 420);
         game.batch.end();
     }
 
