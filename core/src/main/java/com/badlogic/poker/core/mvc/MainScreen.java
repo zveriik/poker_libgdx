@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
+import com.badlogic.poker.core.Utils;
 
 /**
  * Created by Aleksey_Zverkov on 7/1/2015.
@@ -41,7 +42,7 @@ public class MainScreen extends MyScreen {
         for (int j = 0; j < tableTable.length; j++) {
             Image img = tableTable[j];
             img.setName("" + j);
-            img.setPosition(30 + 90 * j, 90);
+            img.setPosition(Utils.INIT_X + Utils.X_STEP * j, Utils.INIT_Y);
             tableGroup.addActor(img);
         }
 

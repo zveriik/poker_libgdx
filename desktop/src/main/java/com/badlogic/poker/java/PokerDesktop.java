@@ -12,6 +12,8 @@ public class PokerDesktop {
 	public static void main (String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Poker";
+		config.height = 480;
+		config.width = 800;
 		new LwjglApplication(new PokerGame(), config);
 	}
 }

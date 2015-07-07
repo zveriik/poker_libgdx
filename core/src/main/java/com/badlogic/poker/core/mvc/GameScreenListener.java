@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
 import com.badlogic.poker.core.PokerStage;
+import com.badlogic.poker.core.Utils;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,11 +52,11 @@ public class GameScreenListener implements InputProcessor {
                 scaleCard(table, count, true);
             }
             if (i == Input.Keys.UP && !isHold) {
-                card.setPosition(card.getX(), card.getY() + 30);
+                card.setPosition(card.getX(), card.getY() + Utils.HOLDS_UP);
                 holds.add(count);
             }
             if (i == Input.Keys.DOWN && isHold) {
-                card.setPosition(card.getX(), card.getY() - 30);
+                card.setPosition(card.getX(), card.getY() - Utils.HOLDS_UP);
                 holds.remove(count);
             }
         }
@@ -91,7 +93,7 @@ public class GameScreenListener implements InputProcessor {
                 for (int place = 0; place < tableCardImages.length; place++) {
                     Image img = tableCardImages[place];
                     img.setName("" + place);
-                    img.setPosition(30 + 90 * place, 90);
+                    img.setPosition(Utils.INIT_X + Utils.X_STEP  * place, Utils.INIT_Y);
                     table.addActor(img);
                 }
             }
@@ -142,8 +144,8 @@ public class GameScreenListener implements InputProcessor {
             if (hitActor != null) {   //hit card for hold
                 System.out.println("Hit X,Y: " + hitActor.getX() + ", "+hitActor.getY());
                 int y = isHold(hitActor) ? -1 : 1;
-                hitActor.setPosition(hitActor.getX(), hitActor.getY() + y * 30);
-                count = (int) (hitActor.getX() - 30) / 90;
+                hitActor.setPosition(hitActor.getX(), hitActor.getY() + y * Utils.HOLDS_UP);
+                count = (int) (hitActor.getX() - Utils.INIT_X) / Utils.INIT_Y;
                 if (!isHold(hitActor))
                     holds.remove(count);
                 else
@@ -163,7 +165,7 @@ public class GameScreenListener implements InputProcessor {
                 for (int place = 0; place < table.length; place++) {
                     Image img = table[place];
                     img.setName("" + place);
-                    img.setPosition(30 + 90 * place, 90);
+                    img.setPosition(Utils.INIT_X + Utils.X_STEP  * place, Utils.INIT_Y);
                     group.addActor(img);
                 }
             }
@@ -187,7 +189,7 @@ public class GameScreenListener implements InputProcessor {
     public boolean mouseMoved(int i, int i1) {
         if (firstTable) {
             Group group = (Group) stage.getActors().peek();
-            int currentPoint = i / 90 > 4 ? 4 : i / 90;
+            int currentPoint = i / Utils.X_STEP  > 4 ? 4 : i / Utils.X_STEP ;
             if (count != currentPoint) {
                 scaleCard(group, count, false);
                 scaleCard(group, currentPoint, true);
@@ -209,7 +211,7 @@ public class GameScreenListener implements InputProcessor {
     }
 
     private boolean isHold(Actor actor) {
-        return actor.getY() > 90;
+        return actor.getY() > Utils.INIT_Y;
     }
 
     private void startNewGame(Group group) {
@@ -218,7 +220,7 @@ public class GameScreenListener implements InputProcessor {
         for (int i = 0; i < images.length; i++) {
             Image img = images[i];
             img.setName("" + i);
-            img.setPosition(30 + 90 * i, 90);
+            img.setPosition(Utils.INIT_X + Utils.X_STEP  * i, Utils.INIT_Y);
             group.addActor(img);
         }
     }

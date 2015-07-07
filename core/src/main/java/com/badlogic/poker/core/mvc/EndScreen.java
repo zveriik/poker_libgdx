@@ -1,7 +1,10 @@
 package com.badlogic.poker.core.mvc;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.poker.core.PokerGame;
 
 
@@ -13,6 +16,7 @@ public class EndScreen extends MyScreen {
     public EndScreen(PokerGame game) {
         super(game);
         Gdx.input.setInputProcessor(null);
+        initScreen();
     }
 
     @Override
@@ -22,9 +26,18 @@ public class EndScreen extends MyScreen {
         String gameOver = "GAME OVER!";
         BitmapFont.TextBounds bounds = game.font.getBounds(gameOver);
         game.font.draw(game.batch, gameOver,
-                Gdx.graphics.getWidth()/2 - bounds.width/2,
-                Gdx.graphics.getHeight()/2 - bounds.height/2);
+                Gdx.graphics.getWidth() / 2 - bounds.width / 2,
+                Gdx.graphics.getHeight() / 2 - bounds.height / 2);
         game.batch.end();
 
+    }
+
+    private void initScreen(){
+        Group background = new Group();
+        stage.addActor(background);
+        Image bg = new Image(new Texture(Gdx.files.internal("poker_start.jpg")));
+        background.addActor(bg);
+
+        System.out.println("Start Screen: Actors added");
     }
 }
