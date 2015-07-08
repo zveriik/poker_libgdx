@@ -9,12 +9,8 @@ import com.badlogic.poker.core.mvc.StartScreen;
 
 public class PokerGame extends Game {
 
-	public final static int WINDOW_WIDTH = 800;
-	public final static int WINDOW_HEIGHT = 480;
-
 	public PokerStage stage;
 	public Controller controller;
-
 	public SpriteBatch batch;
 	public BitmapFont font;
 
@@ -22,7 +18,7 @@ public class PokerGame extends Game {
 	public void create() {
 		stage = new PokerStage();
 		controller = new Controller();
-		font = new BitmapFont(Gdx.files.internal("myFonf.fnt"));
+		font = new BitmapFont(Gdx.files.internal("font.fnt"));
 		batch = new SpriteBatch();
 
 		this.setScreen(new StartScreen(this));

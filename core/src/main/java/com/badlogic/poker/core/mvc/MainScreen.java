@@ -27,7 +27,7 @@ public class MainScreen extends MyScreen {
             game.setScreen(new EndScreen(game));
         }
         game.batch.begin();
-        game.font.draw(game.batch, "MONEY: " + game.controller.getMoney(), 600, 420);
+        game.font.draw(game.batch, "MONEY: " + game.controller.getMoney(), 600, 450);
         game.batch.end();
     }
 

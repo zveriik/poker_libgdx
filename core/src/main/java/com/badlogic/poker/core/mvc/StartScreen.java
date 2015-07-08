@@ -24,11 +24,9 @@ public class StartScreen extends MyScreen {
         super.render(delta);
 
         game.batch.begin();
-        String gameOver = "TAP HERE";
-        BitmapFont.TextBounds bounds = game.font.getBounds(gameOver);
-        game.font.draw(game.batch, gameOver,
-                Gdx.graphics.getWidth()/2 - bounds.width/2,
-                Gdx.graphics.getHeight()/2 - bounds.height/2);
+        String text = "TAP\nTO START";
+        BitmapFont.TextBounds bounds = game.font.getMultiLineBounds(text);
+        game.font.drawMultiLine(game.batch, text, 30, Gdx.graphics.getHeight()/2 - bounds.height/2);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {

@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.poker.core.PokerGame;
 import com.badlogic.poker.core.PokerStage;
 import com.badlogic.poker.core.Utils;
 
@@ -72,10 +71,7 @@ public class GameScreenListener implements InputProcessor {
                     waitNewGame = true;
                     //check win and draw
 
-                    Image winCondition = controller.checkWinCondition();
-                    winCondition.setPosition((PokerGame.WINDOW_WIDTH - winCondition.getWidth()) / 2, (PokerGame.WINDOW_HEIGHT - winCondition.getHeight()) / 2);
-                    table.clear();
-                    table.addActor(winCondition);
+                    drawWinCondition(table);
                     holds.clear();
                 }
             } else {
@@ -120,7 +116,7 @@ public class GameScreenListener implements InputProcessor {
         Group group = (Group) stage.getActors().peek();
         Actor hitActor = group.hit(coord.x, coord.y, false);
 
-        System.out.println("Mouse Hit X,Y: " + i + ", "+i1);
+        System.out.println("Mouse Hit X,Y: " + i + ", " + i1);
 
         if (!firstTable) {
             if (waitNewGame) {
@@ -133,11 +129,7 @@ public class GameScreenListener implements InputProcessor {
                 waitNewGame = true;
                 //check win and draw
 
-                Image winCondition = controller.checkWinCondition();
-                winCondition.setPosition(Gdx.graphics.getWidth()/2 - winCondition.getWidth() / 2, Gdx.graphics.getWidth()/2 - winCondition.getHeight() / 2);
-                group.clear();
-                group.addActor(winCondition);
-
+                drawWinCondition(group);
                 holds.clear();
             }
         } else {
@@ -170,8 +162,6 @@ public class GameScreenListener implements InputProcessor {
                 }
             }
         }
-
-
         return false;
     }
 
@@ -202,6 +192,13 @@ public class GameScreenListener implements InputProcessor {
     @Override
     public boolean scrolled(int i) {
         return false;
+    }
+
+    private void drawWinCondition(Group table) {
+        Image winCondition = controller.checkWinCondition();
+        winCondition.setPosition((Utils.WINDOW_WIDTH - winCondition.getWidth()) / 2, (Utils.WINDOW_HEIGHT - winCondition.getHeight()) / 2);
+        table.clear();
+        table.addActor(winCondition);
     }
 
     private void scaleCard(Group table,  int count, boolean select) {

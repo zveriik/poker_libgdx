@@ -23,11 +23,9 @@ public class EndScreen extends MyScreen {
     public void render(float delta) {
         super.render(delta);
         game.batch.begin();
-        String gameOver = "GAME OVER!";
-        BitmapFont.TextBounds bounds = game.font.getBounds(gameOver);
-        game.font.draw(game.batch, gameOver,
-                Gdx.graphics.getWidth() / 2 - bounds.width / 2,
-                Gdx.graphics.getHeight() / 2 - bounds.height / 2);
+        String gameOver = "GAME\nOVER";
+        BitmapFont.TextBounds bounds = game.font.getMultiLineBounds(gameOver);
+        game.font.drawMultiLine(game.batch, gameOver, 30, Gdx.graphics.getHeight() / 2 - bounds.height / 2);
         game.batch.end();
 
     }
