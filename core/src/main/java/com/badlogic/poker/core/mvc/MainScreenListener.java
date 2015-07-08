@@ -34,11 +34,10 @@ public class MainScreenListener implements InputProcessor {
     public boolean keyDown(int i) {
 
         Group table = (Group) stage.getActors().peek();
-
-        Actor card = table.findActor("" + count);
-        boolean isHold = isHold(card);
-
         if (firstTable) {
+            Actor card = table.findActor("" + count);
+            boolean isHold = isHold(card);
+
             if (i == Input.Keys.RIGHT && count < 4) {
                 scaleCard(table, count, false);
                 count++;
