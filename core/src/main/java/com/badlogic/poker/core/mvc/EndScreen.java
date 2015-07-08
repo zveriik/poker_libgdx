@@ -11,7 +11,7 @@ import com.badlogic.poker.core.PokerGame;
 /**
  * Created by Aleksey_Zverkov on 7/6/2015.
  */
-public class EndScreen extends MyScreen {
+public class EndScreen extends BaseScreen {
 
     public EndScreen(PokerGame game) {
         super(game);

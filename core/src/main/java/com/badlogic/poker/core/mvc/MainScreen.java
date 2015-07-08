@@ -11,12 +11,12 @@ import com.badlogic.poker.core.Utils;
 /**
  * Created by Aleksey_Zverkov on 7/1/2015.
  */
-public class MainScreen extends MyScreen {
+public class MainScreen extends BaseScreen {
 
     public MainScreen(PokerGame game) {
         super(game);
         initScreen();
-        Gdx.input.setInputProcessor(new GameScreenListener(game.controller, stage));
+        Gdx.input.setInputProcessor(new MainScreenListener(game.controller, stage));
     }
 
     @Override

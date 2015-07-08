@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Created by Aleksey_Zverkov on 6/26/2015.
  */
-public class GameScreenListener implements InputProcessor {
+public class MainScreenListener implements InputProcessor {
 
     Controller controller;
     PokerStage stage;
@@ -26,7 +26,7 @@ public class GameScreenListener implements InputProcessor {
     boolean waitNewGame = false;
     int count = 0;
 
-    public GameScreenListener(Controller controller, PokerStage stage) {
+    public MainScreenListener(Controller controller, PokerStage stage) {
         this.controller = controller;
         this.stage = stage;
     }
@@ -85,13 +85,7 @@ public class GameScreenListener implements InputProcessor {
                 controller.replaceCards(holds);
                 holds.clear();
 
-                Image[] tableCardImages = controller.getTableCardImages();
-                for (int place = 0; place < tableCardImages.length; place++) {
-                    Image img = tableCardImages[place];
-                    img.setName("" + place);
-                    img.setPosition(Utils.INIT_X + Utils.X_STEP  * place, Utils.INIT_Y);
-                    table.addActor(img);
-                }
+                drawCardsOnTable(table);
             }
         }
 
@@ -153,13 +147,7 @@ public class GameScreenListener implements InputProcessor {
                 controller.replaceCards(holds);
                 holds.clear();
 
-                Image[] table = controller.getTableCardImages();
-                for (int place = 0; place < table.length; place++) {
-                    Image img = table[place];
-                    img.setName("" + place);
-                    img.setPosition(Utils.INIT_X + Utils.X_STEP  * place, Utils.INIT_Y);
-                    group.addActor(img);
-                }
+                drawCardsOnTable(group);
             }
         }
         return false;
@@ -192,6 +180,16 @@ public class GameScreenListener implements InputProcessor {
     @Override
     public boolean scrolled(int i) {
         return false;
+    }
+
+    private void drawCardsOnTable(Group table) {
+        Image[] tableCardImages = controller.getTableCardImages();
+        for (int place = 0; place < tableCardImages.length; place++) {
+            Image img = tableCardImages[place];
+            img.setName("" + place);
+            img.setPosition(Utils.INIT_X + Utils.X_STEP  * place, Utils.INIT_Y);
+            table.addActor(img);
+        }
     }
 
     private void drawWinCondition(Group table) {

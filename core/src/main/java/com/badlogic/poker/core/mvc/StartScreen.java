@@ -12,7 +12,7 @@ import com.badlogic.poker.core.PokerGame;
 /**
  * Created by Aleksey_Zverkov on 6/18/2015.
  */
-public class StartScreen extends MyScreen {
+public class StartScreen extends BaseScreen {
 
     public StartScreen(PokerGame game) {
         super(game);
@@ -26,7 +26,7 @@ public class StartScreen extends MyScreen {
         game.batch.begin();
         String text = "TAP\nTO START";
         BitmapFont.TextBounds bounds = game.font.getMultiLineBounds(text);
-        game.font.drawMultiLine(game.batch, text, 30, Gdx.graphics.getHeight()/2 - bounds.height/2);
+        game.font.drawMultiLine(game.batch, text, 30, Gdx.graphics.getHeight() / 2 - bounds.height / 2);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {

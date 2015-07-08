@@ -13,13 +13,13 @@ import static com.badlogic.poker.core.Utils.getRGBColor;
 /**
  * Created by Aleksey_Zverkov on 7/3/2015.
  */
-public abstract class MyScreen implements Screen{
+public abstract class BaseScreen implements Screen{
 
     PokerGame game;
     OrthographicCamera camera;
     PokerStage stage;
 
-    public MyScreen(PokerGame game) {
+    public BaseScreen(PokerGame game) {
         this.game = game;
         this.stage = game.stage;
         camera = new OrthographicCamera();
