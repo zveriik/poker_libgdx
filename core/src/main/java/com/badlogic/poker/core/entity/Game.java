@@ -31,10 +31,7 @@ public class Game {
         return deck;
     }
 
-    public Table getTable(String method) {
-        for (Card card : table.getCardsOnDesk()) {
-            System.out.println("method: " + method + " ----- " + card);
-        }
+    public Table getTable() {
         return table;
     }
 

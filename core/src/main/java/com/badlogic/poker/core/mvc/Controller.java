@@ -13,10 +13,10 @@ public class Controller {
     private Logic logic = new Logic();
 
     public Image[] getTableCardImages() {
-        if (logic.getGame().getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).isEmpty())
+        if (logic.getGame().getTable().isEmpty())
             logic.getGame().putCardOnTable();
 
-        Card[] cards = logic.getGame().getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
+        Card[] cards = logic.getGame().getTable().getCardsOnDesk();
         Image[] images = new Image[cards.length];
         for (int i = 0; i < cards.length; i++) {
             Texture texture = new Texture(cards[i].getTexture());

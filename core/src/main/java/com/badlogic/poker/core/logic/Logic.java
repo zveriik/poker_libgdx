@@ -33,18 +33,18 @@ public class Logic {
 
     public void replaceCards(Set<Integer> holds){
 
-        Card[] cards = game.getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
+        Card[] cards = game.getTable().getCardsOnDesk();
         for (Integer replace : holds) {
             game.getDeck().addLast(cards[replace]);
             cards[replace] = game.getDeck().removeFirst();
         }
-        game.getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).setCardsOnDesk(cards);
+        game.getTable().setCardsOnDesk(cards);
         game.shuffleDeck();
 
     }
 
     public WinCondition checkCombination() {
-        Card[] cardsOnDesk = game.getTable(Thread.currentThread().getStackTrace()[2].getMethodName()).getCardsOnDesk();
+        Card[] cardsOnDesk = game.getTable().getCardsOnDesk();
         System.out.println("cards on table: " + cardsOnDesk.length);
         WinCondition win = checkForKind(cardsOnDesk);
         game.drawTable();
@@ -77,7 +77,7 @@ public class Logic {
         });
 
         if (checkList.get(4).getValue().ordinal() - checkList.get(0).getValue().ordinal() == 4)
-            return flush ? checkList.get(4).getValue() == CardValue.ACE ? WinCondition.ROYAL_FLUSH : WinCondition.STRAIGHT_FLUSH : WinCondition.STRAIGHT;
+            return flush ? checkList.get(0).getValue() == CardValue.ACE ? WinCondition.ROYAL_FLUSH : WinCondition.STRAIGHT_FLUSH : WinCondition.STRAIGHT;
         return flush?WinCondition.FLUSH:WinCondition.NONE;
     }
 

@@ -14,6 +14,11 @@ public class Card {
     public Card() {
     }
 
+    public Card(CardSuit suit, CardValue value) {
+        this.suit = suit;
+        this.value = value;
+    }
+
     public Card(CardSuit suit, CardValue value, String texture) {
         this.suit = suit;
         this.value = value;
