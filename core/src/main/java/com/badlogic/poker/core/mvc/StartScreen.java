@@ -26,7 +26,7 @@ public class StartScreen extends BaseScreen {
         game.batch.begin();
         String text = "TAP\nTO START";
         BitmapFont.TextBounds bounds = game.font.getMultiLineBounds(text);
-        game.font.drawMultiLine(game.batch, text, 30, Gdx.graphics.getHeight() / 2 - bounds.height / 2);
+        game.font.drawMultiLine(game.batch, text, 30, 50 + bounds.height);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {

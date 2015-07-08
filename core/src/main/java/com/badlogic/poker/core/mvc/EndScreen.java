@@ -25,7 +25,7 @@ public class EndScreen extends BaseScreen {
         game.batch.begin();
         String gameOver = "GAME\nOVER";
         BitmapFont.TextBounds bounds = game.font.getMultiLineBounds(gameOver);
-        game.font.drawMultiLine(game.batch, gameOver, 30, Gdx.graphics.getHeight() / 2 - bounds.height / 2);
+        game.font.drawMultiLine(game.batch, gameOver, 30, 50 + bounds.height);
         game.batch.end();
 
     }

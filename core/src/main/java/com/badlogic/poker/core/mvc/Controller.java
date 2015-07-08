@@ -43,7 +43,6 @@ public class Controller {
         return getTableCardImages();
     }
 
-
     public String getMoney() {
         return logic.getMoney();
     }

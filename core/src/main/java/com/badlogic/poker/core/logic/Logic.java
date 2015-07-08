@@ -12,7 +12,7 @@ public class Logic {
     private Game game;
 
     public Logic() {
-        game = new Game(new Player(10, 1));
+        game = new Game(new Player(50, 1));
     }
 
     public Game getGame() {

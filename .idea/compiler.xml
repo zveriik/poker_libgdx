@@ -24,9 +24,21 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="poker-android" />
-        <module name="poker-core" />
-        <module name="poker-desktop" />
         <module name="poker-html" />
+      </profile>
+      <profile default="false" name="Annotation profile for poker-core" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="poker-core" />
+      </profile>
+      <profile default="false" name="Annotation profile for poker-desktop" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="poker-desktop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

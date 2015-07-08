@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  * Created by Zveriki on 09.02.2015.
  */
 public enum WinCondition {
-    NONE(-1, "cards/none.png"),
+    NONE(-5, "cards/none.png"),
     PAIR(2, "cards/pair.png"),
     TWO_PAIR(3, "cards/two_pair.png"),
     THREE_OF_KIND(5, "cards/three_of_kind.png"),
